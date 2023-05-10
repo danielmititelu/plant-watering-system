@@ -35,13 +35,13 @@ def disconnect_from_wlan():
 
 def get_time_to_sleep(current_timestamp):
     DAYS_TO_ADD = 0
-    if is_even_year_day(current_timestamp) and is_before_watering_time:
+    if is_even_year_day(current_timestamp) and is_before_watering_time(current_timestamp):
         DAYS_TO_ADD = 0
     elif is_even_year_day(current_timestamp):
         DAYS_TO_ADD = 2
     else:
         DAYS_TO_ADD = 1
-    
+
     target_timestamp = current_timestamp + DAYS_TO_ADD * DAY
     target_timestamp = (target_timestamp // DAY) * DAY + WATERING_TIME * HOUR
     return target_timestamp - current_timestamp 
@@ -87,7 +87,7 @@ while True:
     current_timestamp = time.time() + UTC_OFFSET * HOUR
     if is_watering_time(current_timestamp):
         open_pump()
-    
+
     time_to_sleep = get_time_to_sleep(current_timestamp)
     print(f"Sleeping: {time_to_sleep}")
     sleep(time_to_sleep)
