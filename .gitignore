@@ -1,2 +1,10 @@
 .vscode
 credentials.py
+
+
+.vs
+bin
+logs
+obj
+Collector.csproj.user
+PublishProfiles
